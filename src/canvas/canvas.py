@@ -1,5 +1,5 @@
 from PIL import Image,ImageDraw, ImageFont
-from utils import WrapText
+from utils import WrapText, GetX
 import matplotlib.pyplot as plt
 import io
 
@@ -80,6 +80,7 @@ class Slide:
             y = self.last_cursor_y + self.line_spacing  # place below last object
         if not text:
             print("AddWrapedText: no intput text provided")
+        
             
         max_width = self.width - self.text_padding
         lines = WrapText(draw_viewer=self.draw, text=text, font=font, max_width=max_width)
@@ -98,19 +99,23 @@ class Slide:
 
     # just wrappers so no need for check and such things
     # add title text
-    def AddTitleText(self, x:int, y:int=None, text:str = "", color:str = "black", max_width:int = None):
+    def AddTitleText(self, x, y:int=None, text:str = "", color:str = "black", max_width:int = None):
+        x = GetX(self.width,x)
         slide.AddWrapedText(x, y, text, color, max_width, font=self.title_font)
+        
     # add body text
-    def AddBodyText(self, x:int, y:int=None, text:str = "", color:str = "black", max_width:int = None):
+    def AddBodyText(self, x, y:int=None, text:str = "", color:str = "black", max_width:int = None):
+        x = GetX(self.width,x)
         slide.AddWrapedText(x, y, text, color, max_width, font=self.body_font)
         
     # adds a equation or so into the image
-    def AddLatexText(self, x:int, y:int = None, latex_string:str = "", scale:float = 1.0):
+    def AddLatexText(self, x, y:int = None, latex_string:str = "", scale:float = 1.0):
         # check if it overlaps
         if y is None or y <= self.last_cursor_y:
             y = self.last_cursor_y + self.line_spacing
         if not latex_string:
             print("AddLatexText: no intput text provided")
+        x = GetX(self.width,x)
 
         # try used for all as if a invalid input for the matplotlib will throw a big error somewhere
         try:
@@ -138,8 +143,8 @@ body = """
 """
 
 slide = Slide("akram")
-slide.AddTitleText(50, text=title)
-slide.AddBodyText(50, text=body)
-slide.AddLatexText(50, 250, "c^2 = a^2 + b^2", scale=1.5)
-slide.AddBodyText(50, text="test 2")
+slide.AddTitleText("middle", text=title)
+slide.AddBodyText("left", text=body)
+slide.AddLatexText("left", latex_string="c^2 = a^2 + b^2", scale=1.5)
+slide.AddBodyText("left", text="test 2")
 slide.Save()

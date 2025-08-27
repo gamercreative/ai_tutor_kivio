@@ -26,3 +26,17 @@ def WrapText(draw_viewer, text, font, max_width):
         lines.append(cur_line)
     
     return lines
+
+def GetX(width:int, placement:str):
+    horizental_padding = 50
+    
+    if placement == "middle":
+        return int(width/2)
+    
+    if placement == "left":
+        return int(horizental_padding)
+    
+    if placement == "right":
+        return int(width-horizental_padding)
+    
+    return 50
