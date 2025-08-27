@@ -1,0 +1,40 @@
+{
+  "slides": [
+    {
+      "title": "What's the Pythagorean Theorem?",
+      "text": "The Pythagorean theorem states that in a right-angled triangle, the square of the length of the hypotenuse is equal to the sum of the squares of the lengths of the other two sides. In mathematical notation, a² + b² = c², where c is the length of the hypotenuse and a and b are the lengths of the legs.",
+      "tools": []
+    },
+    {
+      "title": "Deriving the Theorem",
+      "text": "Let’s verify this important theorem with a simple proof. Consider a right triangle with legs of length a and b, and hypotenuse of length c. By the Pythagorean theorem, c² = a² + b². Using (a + b)² as an expansion, we find (a + b)² = a² + 2ab + b². Since the square of the hypotenuse is simply (a + b)², this implies c² = a² + 2ab + b², or a² + b² = c² - ab.",
+      "tools": [
+        {
+          "function": "render_latex",
+          "args": {
+            "latex_str": "a^2 + b^2 = c^2 - ab"
+          }
+        }
+      ]
+    },
+    {
+      "title": "Graphical Representation",
+      "text": "The Pythagorean theorem can also be represented graphically: the square of the hypotenuse is equal to the sum of the areas of the squares on the other two sides. In a Cartesian coordinate system, the equation of the circle with center at the origin and radius r is x² + y² = r². For a right triangle, we have two squares with sides a and b, and the hypotenuse c. This leads to the equation c² = a² + b², which is the graphic representation of the Pythagorean theorem. Let’s plot the graph to visualize it.",
+      "tools": [
+        {
+          "function": "plot_graph",
+          "args": {
+            "equation": "y=sqrt(c^2-x^2)",
+            "x_range": [0, 10],
+            "y_range": [0, 10]
+          }
+        }
+      ]
+    },
+    {
+      "title": "Review and Practice",
+      "text": "Now that we've covered the Pythagorean theorem and its derivation and graphical representation, it's time to practice! Solve some example problems and test your understanding with the help of a calculator or a set of right triangles. Remember, practice makes perfect!",
+      "tools": []
+    }
+  ]
+}

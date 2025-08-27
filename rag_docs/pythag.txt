@@ -1,0 +1,9 @@
+The Pythagorean theorem is a fundamental principle in geometry. It states that in a right-angled triangle, the square of the hypotenuse (the side opposite the right angle) is equal to the sum of the squares of the other two sides. If we label the sides of the triangle as a and b, and the hypotenuse as c, the formula is:
+
+a^2 + b^2 = c^2
+
+For example, if one side a is 3 meters and the other side b is 4 meters, the length of the hypotenuse c can be calculated as:
+
+c = √(3^2 + 4^2) = √(9 + 16) = √25 = 5 meters
+
+The theorem can also be visualized by drawing squares on each side of the triangle. The sum of the areas of the squares on sides a and b equals the area of the square on the hypotenuse c. This principle is widely used in geometry, construction, navigation, and many other fields.
