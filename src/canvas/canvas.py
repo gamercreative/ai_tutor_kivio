@@ -102,11 +102,11 @@ class Slide:
     # just wrappers so no need for check and such things
     # add title text
     def AddTitleText(self, x, y:int=None, text:str = "", color:str = "black", max_width:int = None):
-        slide.AddWrapedText(x, y, text, color, max_width, font=self.title_font)
+        self.AddWrapedText(x, y, text, color, max_width, font=self.title_font)
         
     # add body text
     def AddBodyText(self, x, y:int=None, text:str = "", color:str = "black", max_width:int = None):
-        slide.AddWrapedText(x, y, text, color, max_width, font=self.body_font)
+        self.AddWrapedText(x, y, text, color, max_width, font=self.body_font)
         
     # adds a equation or so into the image
     def AddLatexText(self, x, y:int = None, latex_string:str = "", scale:float = 1.0):
@@ -169,18 +169,19 @@ class Slide:
             
         except Exception as e:
                 print(f"AddGraph error: {e}")
-                
-title = "Quadratic Growth Function"
-    
-body = """
-This graph shows a quadratic growth function, where the y values increase as the square of x. Notice how the curve starts shallow and then rises sharply. Quadratic functions model acceleration, projectile motion, and many natural growth processes.
-"""
 
-points = [(x, math.sin(x/2) * 10) for x in range(0, 50)]
+if __name__ == "__main__":
+    title = "Quadratic Growth Function"
+        
+    body = """
+    This graph shows a quadratic growth function, where the y values increase as the square of x. Notice how the curve starts shallow and then rises sharply. Quadratic functions model acceleration, projectile motion, and many natural growth processes.
+    """
 
-slide = Slide("akram")
-slide.AddTitleText("middle", text=title)
-slide.AddBodyText("left", text=body)
-# slide.AddLatexText("middle", latex_string="c^2 = a^2 + b^2", scale=1)
-slide.AddGraph("middle", points=points, x_label="X", y_label="Y", title="Quadratic Growth", scale=2)
-slide.Save()
+    points = [(x, math.sin(x/2) * 10) for x in range(0, 50)]
+
+    slide = Slide("akram")
+    slide.AddTitleText("middle", text=title)
+    slide.AddBodyText("left", text=body)
+    # slide.AddLatexText("middle", latex_string="c^2 = a^2 + b^2", scale=1)
+    slide.AddGraph("middle", points=points, x_label="X", y_label="Y", title="Quadratic Growth", scale=2)
+    slide.Save()
