@@ -27,16 +27,18 @@ def WrapText(draw_viewer, text, font, max_width):
     
     return lines
 
-def GetX(width:int, placement:str):
+# used to make the placemnet text right left center turn into numeric x
+# this takes into account bbox padding
+def GetX(frame_width:int, placement:str,w:int):
     horizental_padding = 50
     
     if placement == "middle":
-        return int(width/2)
+        return int(frame_width - w) // 2
     
     if placement == "left":
         return int(horizental_padding)
     
     if placement == "right":
-        return int(width-horizental_padding)
-    
-    return 50
+        return int(frame_width - horizental_padding - w)
+
+    return horizental_padding

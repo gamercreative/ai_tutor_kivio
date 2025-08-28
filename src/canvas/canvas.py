@@ -1,7 +1,8 @@
 from PIL import Image,ImageDraw, ImageFont
-from utils import WrapText, GetX
+from canvas.utils import WrapText, GetX
 import matplotlib.pyplot as plt
 import io
+import math # remove ba3ed el testing
 
 # a class for each slide containing the ability to just add to a slide using a function
 class Slide:
@@ -18,7 +19,7 @@ class Slide:
         
         #wraped text settings
         self.text_padding = 50
-        self.line_spacing = 5
+        self.line_spacing = 12
         
         # fonts can be customj or default
         try:
@@ -74,7 +75,7 @@ class Slide:
         print(f"saved file at {path_with_file}")
 
     # adds wraped text to the image
-    def AddWrapedText(self, x:int, y:int=None, text:str = "", color:str = "black", max_width:int = None, font = None):
+    def AddWrapedText(self, x, y:int=None, text:str = "", color:str = "black", max_width:int = None, font = None):
         # check if it overlaps
         if y is None or y <= self.last_cursor_y:
             y = self.last_cursor_y + self.line_spacing  # place below last object
@@ -89,23 +90,22 @@ class Slide:
         
         cursur_y:int = y
         for line in lines:
-            self.AddText(x=x , y=cursur_y, text=line, color=color, font=font)
-            _, h = self.draw.textbbox((0, 0), line, font=font)[2:4]
+            w, h = self.draw.textbbox((0, 0), line, font=font)[2:4]
+            x_new = GetX(self.width,x,int(w))
+            self.AddText(x=x_new , y=cursur_y, text=line, color=color, font=font)
             cursur_y += int(h) + self.line_spacing
             if cursur_y >= self.height:
-                print("AddWrapedText: text is too big to fit in the frame")
+                print("AddWrapedText: text is too big to fit in the slide frame")
                 break
         self.last_cursor_y = cursur_y
 
     # just wrappers so no need for check and such things
     # add title text
     def AddTitleText(self, x, y:int=None, text:str = "", color:str = "black", max_width:int = None):
-        x = GetX(self.width,x)
         slide.AddWrapedText(x, y, text, color, max_width, font=self.title_font)
         
     # add body text
     def AddBodyText(self, x, y:int=None, text:str = "", color:str = "black", max_width:int = None):
-        x = GetX(self.width,x)
         slide.AddWrapedText(x, y, text, color, max_width, font=self.body_font)
         
     # adds a equation or so into the image
@@ -115,36 +115,72 @@ class Slide:
             y = self.last_cursor_y + self.line_spacing
         if not latex_string:
             print("AddLatexText: no intput text provided")
-        x = GetX(self.width,x)
 
         # try used for all as if a invalid input for the matplotlib will throw a big error somewhere
         try:
             fig, ax = plt.subplots(figsize=(4*scale, 1*scale), dpi=150)
             ax.axis("off")
             ax.text(0.5,0.5, f"${latex_string}$", fontsize=int(20*scale), ha="center", va = "center")
+            
             buf = io.BytesIO()
             plt.savefig(buf, format="png", bbox_inches="tight", transparent=True)
             plt.close(fig)
             buf.seek(0)
             latex_img = Image.open(buf)
+            
+            x = GetX(self.width,x ,latex_img.width)
             self.img.paste(latex_img, (x,y), latex_img)
             self.last_cursor_y = y + latex_img.height + self.line_spacing
 
         except Exception as e:
             print(f"AddLatexText error: {e}")
-    
-title = "### RULES FOR GENERATION"
+            
+    # adds a graph of any kind to the slide
+    def AddGraph(self, x, y:int = None, points:list = None, x_label:str = None, y_label:str = None, title:str = None, scale:float = 1.0):
+        # check if it overlaps
+        if y is None or y <= self.last_cursor_y:
+            y = self.last_cursor_y + self.line_spacing
+        if len(points) == 0:
+            print("AddGraph: no intput points provided")
+
+        try:
+            fig,ax = plt.subplots(figsize=(4*scale, 1*scale),dpi = 150)
+            xs,ys = zip(*points)
+            ax.plot(xs,ys,marker="o",linestyle="-")
+            
+            if title: ax.set_title(label=title)
+            else: print("AddGraph: not title provided for the graph")
+            
+            if x_label: ax.set_xlabel(xlabel=x_label)
+            else: print(f"AddGraph: no x label provided for graph {title}")
+            
+            if y_label: ax.set_ylabel(ylabel=y_label)
+            else: print(f"AddGraph: no y label provided for graph {title}")
+            
+            buf = io.BytesIO()
+            plt.savefig(buf,format="png",bbox_inches="tight",transparent = True)
+            plt.close(fig)
+            buf.seek(0)
+            graph_image = Image.open(buf)
+            
+            x = GetX(self.width,x ,graph_image.width)
+            self.img.paste(graph_image, (x, y), graph_image)
+            self.last_cursor_y = y + graph_image.height + self.line_spacing
+            
+        except Exception as e:
+                print(f"AddGraph error: {e}")
+                
+title = "Quadratic Growth Function"
     
 body = """
-1. **JSON only**. Do not include markdown, comments, backticks, or text outside the JSON object.
-2. `"title"` → Short, descriptive slide title.
-3. `"text"` → Transcript for TTS, natural spoken style. At least 20 words if only text. Max 50 words (60 if multiple tools).
-4. `"tools"` → Each slide can include at most 1 `render_latex` and 1 `plot_graph` entry.
+This graph shows a quadratic growth function, where the y values increase as the square of x. Notice how the curve starts shallow and then rises sharply. Quadratic functions model acceleration, projectile motion, and many natural growth processes.
 """
+
+points = [(x, math.sin(x/2) * 10) for x in range(0, 50)]
 
 slide = Slide("akram")
 slide.AddTitleText("middle", text=title)
 slide.AddBodyText("left", text=body)
-slide.AddLatexText("left", latex_string="c^2 = a^2 + b^2", scale=1.5)
-slide.AddBodyText("left", text="test 2")
+# slide.AddLatexText("middle", latex_string="c^2 = a^2 + b^2", scale=1)
+slide.AddGraph("middle", points=points, x_label="X", y_label="Y", title="Quadratic Growth", scale=2)
 slide.Save()
