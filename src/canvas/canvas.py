@@ -2,6 +2,8 @@ from PIL import Image,ImageDraw, ImageFont
 from canvas.utils import WrapText, GetX
 import matplotlib.pyplot as plt
 import io
+from pylatexenc.latexwalker import LatexWalker
+from pylatexenc.latex2text import LatexNodes2Text
 import math # remove ba3ed el testing
 
 # a class for each slide containing the ability to just add to a slide using a function
@@ -60,6 +62,13 @@ class Slide:
         if not text:
             print("AddText: no intput text provided")
             
+        # Parse the LaTeX code
+        latex_walker = LatexWalker(text)
+        nodelist, pos, len_consumed = latex_walker.get_latex_nodes()
+
+        # Convert to plain text with Unicode math symbols
+        unicode_text = LatexNodes2Text().nodelist_to_text(nodelist)
+            
         self.draw.text((x,y),text, fill=color, font=font)
         print(f"{text} added at pos x:{x} y:y{y}")
         
@@ -81,6 +90,8 @@ class Slide:
             y = self.last_cursor_y + self.line_spacing  # place below last object
         if not text:
             print("AddWrapedText: no intput text provided")
+        if y >= self.height:
+            print("AddWrapedText: slide cannot fit more content vertically")
         
             
         max_width = self.width - self.text_padding
@@ -115,6 +126,8 @@ class Slide:
             y = self.last_cursor_y + self.line_spacing
         if not latex_string:
             print("AddLatexText: no intput text provided")
+        if y >= self.height:
+            print("AddWrapedText: slide cannot fit more content vertically")
 
         # try used for all as if a invalid input for the matplotlib will throw a big error somewhere
         try:
@@ -142,6 +155,8 @@ class Slide:
             y = self.last_cursor_y + self.line_spacing
         if len(points) == 0:
             print("AddGraph: no intput points provided")
+        if y >= self.height:
+            print("AddWrapedText: slide cannot fit more content vertically")
 
         try:
             fig,ax = plt.subplots(figsize=(4*scale, 1*scale),dpi = 150)

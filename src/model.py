@@ -1,8 +1,8 @@
-import json
 import math
 import matplotlib.pyplot as plt
 from PIL import Image, ImageDraw, ImageFont
 import io
+import yaml
 import os
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 
@@ -15,7 +15,7 @@ pipe = pipeline(model=model, tokenizer=tokenizer, task='text-generation')
 # -------------------------
 # 2️⃣ Load prompt and RAG
 # -------------------------
-with open("prompts/prompt2.txt", "r") as f:
+with open("prompts/prompt.txt", "r") as f:
     prompt_template = f.read()
 
 with open("rag_docs/pythag.txt", "r") as f:
@@ -26,15 +26,15 @@ prompt = prompt_template.replace("<RAG>", rag_data)
 
 # get output and filter the output text form the rest of hte metadat
 output = pipe(prompt, max_new_tokens=1500, return_full_text=False)
-slides_json = output[0]["generated_text"]
+slides_yaml = output[0]["generated_text"]
 
-# filter anything except for the json response if anyting else exists
-first_brace = slides_json.find("{")
-if first_brace != -1:
-    slides_json_clean = slides_json[first_brace:]
-else:
-    raise ValueError("No JSON object found in the model output")
+try:
+    slides_data = yaml.safe_load(slides_yaml)
+except yaml.YAMLError as e:
+    print("YAML parsing error:", e)
+    slides_data = None
 
-# save the output 
-with open("../slides.json", "w") as f:
-    f.write(slides_json_clean)
+# Save the output as a YAML file
+with open("slides.yaml", "w") as f:
+    f.write(slides_yaml)
+    print("done")

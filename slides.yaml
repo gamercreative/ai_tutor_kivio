@@ -1,0 +1,106 @@
+
+---
+
+slides:
+  - title:
+      text: "Pythagorean Theorem"
+      alignment: "middle"
+
+    body:
+      text: "This theorem states that in a right triangle, the square of the length of the hypotenuse (the side opposite the right angle) is equal to the sum of the squares of the lengths of the other two sides."
+      alignment: "left"
+
+    tools:
+      - function: render_latex
+
+        args:
+          latex_str: "a² + b² = c²"
+          alignment: "right"
+
+  - title:
+      text: "Prove Pythagorean Theorem"
+      alignment: "middle"
+
+    body:
+      text: "Let a and b be the lengths of the two legs of the right triangle, and c be the length of the hypotenuse. We'll prove this using two equations."
+      alignment: "left"
+
+    tools:
+      []
+
+  - title:
+      text: "Equation 1: a²"
+      alignment: "middle"
+
+    body:
+      text: "Square each side of the triangle, we get a² and b²."
+      alignment: "left"
+
+    tools:
+      []
+
+  - title:
+      text: "Equation 2: a² + b²"
+      alignment: "middle"
+
+    body:
+      text: "Find the square of the hypotenuse, c². By the Pythagorean theorem, we know that c² = a² + b²."
+      alignment: "left"
+
+    tools:
+      []
+
+  - title:
+      text: "Prove Pythagorean Theorem (Part 2)"
+      alignment: "middle"
+
+    body:
+      text: "Now, let's prove that a² + b² equals c²."
+      alignment: "left"
+
+    tools:
+      []
+
+  - title:
+      text: "Subtract a² from Equation 2"
+      alignment: "middle"
+
+    body:
+      text: "Subtract a² from both sides of Equation 2: c² = a² + b²."
+      alignment: "left"
+
+    tools:
+      []
+
+  - title:
+      text: "Result: c² = a² + b²"
+      alignment: "middle"
+
+    body:
+      text: "We now have the result that c² equals a² + b²."
+      alignment: "left"
+
+    tools:
+      []
+
+  - title:
+      text: "Square Root of c²"
+      alignment: "middle"
+
+    body:
+      text: "Take the square root of both sides to find the value of c."
+      alignment: "left"
+
+    tools:
+      []
+
+  - title:
+      text: "Result: c = √(a² + b²)"
+      alignment: "middle"
+
+    body:
+      text: "The final result is that the length of the hypotenuse, c, is equal to the square root of the sum of the squares of the legs, a and b."
+      alignment: "left"
+
+    tools:
+      []

@@ -1,4 +1,5 @@
 import json 
+import yaml
 from canvas.canvas import Slide
 import os
 from dataclasses import dataclass, field
@@ -27,6 +28,11 @@ def ExtractJson(path:str):
     data = json.loads(json_str)
     return data
 
+def ExtractYaml(path: str):
+    with open(path, "r") as f:
+        data = yaml.safe_load(f)
+    return data
+
 def StoreSlides(data) -> list[SlideData]:
     slides = data.get("slides",None)
     if len(slides) == 0:
@@ -35,9 +41,9 @@ def StoreSlides(data) -> list[SlideData]:
 
     slides_data: list[SlideData] = []
     for slide in slides:
-        tool_list = [ToolCall(**tool) for tool in slide.get("tools",None)]
+        tool_list = [ToolCall(**tool) for tool in slide.get("tools",[])]
         title = slide.get("title",())
-        body = slide.get("text",())
+        body = slide.get("body",())
         slides_data.append(SlideData(
             title= Paragraph(text=title["text"], alignment=title["alignment"]),
             text= Paragraph(text =body["text"], alignment=body["alignment"]),
@@ -72,8 +78,8 @@ def MakeSlide(slide_data:SlideData):
                 scale=tool.args.get("scale", 1.0)
             )
 
-    slide.Save()
+    slide.Save("output/")
             
-for slide in StoreSlides(ExtractJson("slides.json")):
+for slide in StoreSlides(ExtractYaml("slides.yaml")):
     print(slide.title.text)
     MakeSlide(slide)

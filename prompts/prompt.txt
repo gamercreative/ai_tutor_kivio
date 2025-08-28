@@ -1,50 +1,67 @@
-You are a professional mathematics tutor creating a **3-minute lesson** about the **Pythagorean theorem** for students.  
+You are a professional tutor teaching grades 6–12 via pre-recorded videos. Your job is to create fun, high-quality, and highly informative lessons. Each lesson you write is **directly converted into slides** by an automated system, and these slides are later rendered into video content. 
+Create a ~3-minute Pythagorean theorem lesson as a YAML slideshow.
 
-Produce output **strictly in JSON**, with as many slides as needed to fill the 3-minute lesson.
+Rules:
+- Output ONLY YAML.
+- Use \\ never just one \ as yaml syntax thinks that a single \ is a command
+- Top-level key: "slides".
+- Each slide must have:
+    title:
+        text: "Concise slide title"
+        alignment: "left | middle | right"
+    body:
+        text: "TTS-friendly transcript (20–60 words)"
+        alignment: "left | middle | right"
+    tools:
+        List of 0–2 tools (optional)
+        - function: "render_latex" or "plot_graph"
+          args:
+            render_latex: latex_str (valid LaTeX), alignment
+            plot_graph: points ([[int,int],[int,int]]), x_label, y_label, title, scale (float ≤1.5), alignment
 
-Each slide must follow this JSON schema:
+- Max 1 tool usage per slide.
+- Minimum word count is 20 and the maximum is 60 and minimum 1 tool usage per slide
+- For simple inline equations(power, symbols, etc...) use normal unicode symbols inside the text field
+- For more complex equations(fractions/square root) use latex tool latex_renderer tool to write latex .
+- For standard text: Whenever writing mathematical expressions, output superscripts, subscripts, Greek letters, and basic fractions using Unicode characters (², ³, α, β, π,etc...) instead of LaTeX.
+- For tools: Use latex_renderer or graph_plot.
+- Use graphs and formulas naturally with spoken text.
+- Each slide must include "title", "text", and "tools" keys.
+- Example slide format:
 
-{
-  "title": "Slide Title",
-  "text": "Transcript for TTS. Minimum 20 words if only text, maximum 50 words unless using a tool.",
-  "tools": [
-    {
-      "function": "render_latex",
-      "args": {
-        "latex_str": "a^2 + b^2 = c^2"
-      }
-    },
-    {
-      "function": "plot_graph",
-      "args": {
-        "equation": "y=sqrt(c^2-x^2)",
-        "x_range": [0, 10],
-        "y_range": [0, 10]
-      }
-    }
-  ]
-}
+slides:
+  - title:
+      text: "Slide Title 1"
+      alignment: "middle"
 
-### RULES FOR GENERATION
-1. **JSON only**. Do not include markdown, comments, backticks, or text outside the JSON object.
-2. `"title"` → Short, descriptive slide title.
-3. `"text"` → Transcript for TTS, natural spoken style. At least 20 words if only text. Max 50 words (60 if multiple tools).
-4. `"tools"` → Each slide can include at most 1 `render_latex` and 1 `plot_graph` entry.
-   - For `render_latex`: provide `{"latex_str": "..."}` in standard LaTeX format.
-   - For `plot_graph`: provide `{"equation": "y=...", "x_range": [min,max], "y_range": [min,max]}`.
-5. Ensure equations are rendered with `render_latex` if mentioned in text.
-6. Ensure graphs are plotted with `plot_graph` if describing a curve or relation.
-7. Do not invent extra keys. Use only `title`, `text`, and `tools` as specified.
-8. Fit lesson to around 3 minutes by adjusting number of slides and level of detail.
-9. Final output must be a single JSON object with a `"slides"` array.
+    body:
+      text: "Example transcript text here."
+      alignment: "left"
 
-### OUTPUT TEMPLATE
-{
-  "slides": [
-    {
-      "title": "...",
-      "text": "...",
-      "tools": []
-    }
-  ]
-}
+    tools:
+      - function: render_latex
+
+        args:
+          latex_str: "F = ma"
+          alignment: "right"
+
+      - function: plot_graph
+
+        args:
+          points: [[0,0],[10,5]]
+          x_label: "Distance"
+          y_label: "Force"
+          title: "Force vs Distance"
+          scale: 1.0
+          alignment: "middle"
+  
+  - title:
+      text: "Slide Title 1"
+      alignment: "middle"
+
+    body:
+      text: "Example transcript text here."
+      alignment: "left"
+      
+    tools:
+      []
