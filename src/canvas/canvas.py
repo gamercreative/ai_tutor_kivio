@@ -26,14 +26,12 @@ class Slide:
         # fonts can be customj or default
         try:
             self.title_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", size=48)
-            print("title font found")
         except:
             print("No title font found, using default")
             self.title_font = ImageFont.load_default()
 
         try:
             self.body_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", size=32)
-            print("body font found")
         except:
             print("No body font found, using default")
             self.body_font = ImageFont.load_default()
@@ -43,16 +41,17 @@ class Slide:
                 
         # init sequence for canvas
         self.CreateEmptyImage()
-        print("slide init completed")
             
     # creates an image
     def CreateEmptyImage(self):
         # now creates the image
         # saves the image as an object not saved to disk yet only ram
-        self.img = Image.new("RGB",(self.width, self.height), color=self.color)
-        # also saves a drawing context of the image to edit it
-        self.draw = ImageDraw.Draw(self.img)
-        print("image created successfuly")
+        try:
+            self.img = Image.new("RGB",(self.width, self.height), color=self.color)
+            # also saves a drawing context of the image to edit it
+            self.draw = ImageDraw.Draw(self.img)
+        except Exception as e:
+            print(f"CreateEmptyImage: {e}")
                 
     # adds text in the image in absoulte values
     def AddText(self, x:int, y:int=None, text:str= "", color:str = "black", font=None):
@@ -70,7 +69,7 @@ class Slide:
         unicode_text = LatexNodes2Text().nodelist_to_text(nodelist)
             
         self.draw.text((x,y),text, fill=color, font=font)
-        print(f"{text} added at pos x:{x} y:y{y}")
+        # print(f"{text} added at pos x:{x} y:y{y}")
         
         y = int(y) + self.line_spacing
         self.last_cursor_y = y
@@ -159,7 +158,7 @@ class Slide:
             print("AddWrapedText: slide cannot fit more content vertically")
 
         try:
-            fig,ax = plt.subplots(figsize=(4*scale, 1*scale),dpi = 150)
+            fig,ax = plt.subplots(figsize=(2*scale, 1*scale),dpi = 150)
             xs,ys = zip(*points)
             ax.plot(xs,ys,marker="o",linestyle="-")
             
