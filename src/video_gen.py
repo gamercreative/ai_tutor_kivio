@@ -1,7 +1,6 @@
 from moviepy import ImageClip, AudioFileClip, concatenate_videoclips # temp for now for testing
 import numpy as np
 from os import makedirs
-from utils import GetAudioDuration # change the sr is the sr changes in dev
 
 class VideoGenerator:
     def __init__(self,output_dir="video_output/",video_name = "video_test"):

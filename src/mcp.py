@@ -1,9 +1,10 @@
-from canvas.canvas import Slide
+from src.canvas.canvas import Slide
 from dataclasses import dataclass, field
 from typing import Any
-from utils import *
-from voice_model import TTSModel
-from video_gen import VideoGenerator
+from src.utils import *
+from src.voice_model import TTSModel
+from src.text_model import TextModel
+from src.video_gen import VideoGenerator
 
 @dataclass
 class Function:
@@ -93,9 +94,10 @@ def MakeSlide(slide_data:SlideData):
         
     return output_dest
 
-def GenerateVideo(yaml_path):
+def MakeVideo(yaml_path):
     video_gen = VideoGenerator()
     slides_with_transcript:dict[str,Any] = {}
+
     for slide in StoreSlides(ExtractYaml(yaml_path)):
         title = slide.title.text
         img = MakeSlide(slide)
@@ -107,4 +109,4 @@ def GenerateVideo(yaml_path):
 
 
 if __name__ == "__main__":
-    GenerateVideo("slides.yaml")
+    MakeVideo("slides.yaml")

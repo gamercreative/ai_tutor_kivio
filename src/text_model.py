@@ -1,39 +1,49 @@
-import math
 import matplotlib.pyplot as plt
-from PIL import Image, ImageDraw, ImageFont
-import io
 import yaml
-import os
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
+from os import makedirs
 
-model_id = "alokabhishek/Mistral-7B-Instruct-v0.2-bnb-4bit"
-tokenizer = AutoTokenizer.from_pretrained(model_id, use_fast=True)
-model = AutoModelForCausalLM.from_pretrained(model_id, device_map="auto")
+class TextModel:
+    def __init__(self,path = "text_output"):
+        self.model_id = "alokabhishek/Mistral-7B-Instruct-v0.2-bnb-4bit"
+        self.tokenizer = AutoTokenizer.from_pretrained(self.model_id, use_fast=True)
+        self.model = AutoModelForCausalLM.from_pretrained(self.model_id, device_map="auto")
+        self.pipe = pipeline(model=self.model, tokenizer=self.tokenizer, task='text-generation')
+        
+        makedirs(path,exist_ok = True)
+        self.output_dest = path.strip() + "/" + "slides.yaml"
 
-pipe = pipeline(model=model, tokenizer=tokenizer, task='text-generation')
+    def GetPrompt(self,path = "prompts/prompt.txt"):
+        with open(path, "r") as f:
+            prompt_template = f.read()
+        return prompt_template
 
-with open("prompts/prompt.txt", "r") as f:
-    prompt_template = f.read()
+    def GetRag(self,path = "rag_docs/pythag.txt"):
+        with open(path, "r") as f:
+            rag_data = f.read()
 
-with open("rag_docs/pythag.txt", "r") as f:
-    rag_data = f.read()
+    def GenerateText(self):
+        prompt = self.GetPrompt()
+        
+        rag = self.GetRag()
+        # prompt = prompt_template.replace("<RAG>", rag_data)
+        
+        # get output and filter the output text form the rest of hte metadat
+        output = self.pipe(prompt, max_new_tokens=4000, return_full_text=False, temperature= 0.05)
+        slides_yaml = output[0]["generated_text"]
+        
+        self.Save(slides_yaml)
+        return self.output_dest
 
-# Inject RAG into the prompt
-# prompt = prompt_template.replace("<RAG>", rag_data)
-prompt = prompt_template
+    # Save the output as a YAML file
+    def Save(self, slides_yaml):
+        with open(self.output_dest, "w") as f:
+            f.write(slides_yaml)
+            print("done")
 
-# get output and filter the output text form the rest of hte metadat
-output = pipe(prompt, max_new_tokens=4000, return_full_text=False, temperature= 0.05)
-slides_yaml = output[0]["generated_text"]
-
-# Save the output as a YAML file
-with open("slides.yaml", "w") as f:
-    f.write(slides_yaml)
-    print("done")
-
-try:
-    slides_data = yaml.safe_load(slides_yaml)
-except yaml.YAMLError as e:
-    print("YAML parsing error:", e)
-    slides_data = None
+        try:
+            slides_data = yaml.safe_load(slides_yaml)
+        except yaml.YAMLError as e:
+            print("YAML parsing error:", e)
+            slides_data = None
 

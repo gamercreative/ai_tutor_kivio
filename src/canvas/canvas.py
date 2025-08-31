@@ -1,5 +1,5 @@
 from PIL import Image,ImageDraw, ImageFont
-from canvas.utils import WrapText, GetX
+from src.canvas.utils import WrapText, GetX
 import matplotlib.pyplot as plt
 import io
 from os import makedirs
