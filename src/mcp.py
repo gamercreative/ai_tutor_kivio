@@ -3,6 +3,7 @@ from dataclasses import dataclass, field
 from typing import Any
 from utils import *
 from voice_model import TTSModel
+from video_gen import VideoGenerator
 
 @dataclass
 class Function:
@@ -41,16 +42,18 @@ def StoreSlides(data) -> list[SlideData]:
 def MakeTranscripts(slide_data:SlideData):
     tts = TTSModel()
     text_for_transcript = ""
-    slide_name = slide_data.title.text
+
     for item in slide_data.content:
         name = item.get("type","")
         args = item.get("args",[])
         
         if name == "text":
             txt = args.get("text","text missing")
-            text_for_transcript = txt + " "
+            text_for_transcript += txt + " "
             
-    tts.SpeakAndSave(text_for_transcript, slide_name)
+    output_dest = tts.SpeakAndSave(text_for_transcript, slide_data.title.text)
+    
+    return output_dest
 
 # make slides from slidedata object that has all the yaml output
 def MakeSlide(slide_data:SlideData):
@@ -85,8 +88,23 @@ def MakeSlide(slide_data:SlideData):
                 scale=args.get("scale",1.0)
             )
         
-    slide.Save("slide_output/")
-            
-for slide in StoreSlides(ExtractYaml("slides.yaml")):
-    MakeSlide(slide)
-    MakeTranscripts(slide)
+    output_dir = "slide_output"
+    output_dest = slide.Save(output_dir)
+        
+    return output_dest
+
+def GenerateVideo(yaml_path):
+    video_gen = VideoGenerator()
+    slides_with_transcript:dict[str,Any] = {}
+    for slide in StoreSlides(ExtractYaml(yaml_path)):
+        title = slide.title.text
+        img = MakeSlide(slide)
+        audio = MakeTranscripts(slide)
+        slides_with_transcript.update({title:{"image":img, "audio":audio}})
+        
+    print(slides_with_transcript)
+    video_gen.MakeVideo(slides_with_transcript)
+
+
+if __name__ == "__main__":
+    GenerateVideo("slides.yaml")

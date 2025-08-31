@@ -13,13 +13,20 @@ class TTSModel:
         
         # model configs
         # self.speaker = "ED\n" # the most natural one for our worklaod
-        self.speaker = random.choice(self.tts.speakers).strip()  # strip() to remove any trailing newline
+        self.speaker = random.choice(self.tts.speakers)
         self.sample_rate = 22050
         
         # output configs
         self.output_dir = output_dir.strip()
         makedirs(output_dir, exist_ok=True)
         
+    def GenerateAudio(self, text):
+
+        wav = self.tts.tts(text, speaker=self.speaker)
+        wav = np.array(wav, dtype=np.float32)
+
+        return wav
+
     def SpeakAndSave(self, text, file_name):
 
         wav = self.tts.tts(text, speaker=self.speaker)
@@ -27,7 +34,8 @@ class TTSModel:
 
         output_dest = self.output_dir + "/" + file_name.strip() + ".wav"
         sf.write(output_dest, wav, self.sample_rate)
-        
+        return output_dest
+
 if __name__ == "__main__":
     tts = TTSModel("voice_test")
     tts.SpeakAndSave("this is a test","test1")

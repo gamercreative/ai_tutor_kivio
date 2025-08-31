@@ -80,9 +80,10 @@ class Slide:
     # path is without file name and extension only folder path
     def Save(self, path=""):
         makedirs(name=path, exist_ok = True)
-        path_with_file = path + self.name + self.file_extension
+        path_with_file = path.strip() + "/" + self.name + self.file_extension
         self.img.save(path_with_file)
         print(f"saved file at {path_with_file}")
+        return path_with_file
 
     # adds wraped text to the image
     def AddWrapedText(self, x, y:int=None, text:str = "", color:str = "black", max_width:int = None, font = None):
