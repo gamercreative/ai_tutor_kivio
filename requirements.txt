@@ -1,0 +1,12 @@
+matplotlib==3.10.6
+moviepy==2.2.1
+numpy==2.3.2
+Pillow==11.3.0
+pylatexenc==2.10
+PyYAML==6.0.2
+PyYAML==6.0.2
+soundfile==0.13.1
+torch==2.8.0
+transformers==4.52.4
+TTS==0.22.0
+accelerate
