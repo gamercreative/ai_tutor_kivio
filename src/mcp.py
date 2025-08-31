@@ -1,9 +1,8 @@
-import json 
-import yaml
 from canvas.canvas import Slide
-import os
 from dataclasses import dataclass, field
-from typing import List, Dict, Any
+from typing import Any
+from utils import *
+from voice_model import TTSModel
 
 @dataclass
 class Function:
@@ -20,18 +19,7 @@ class SlideData:
     title:Paragraph
     content: list[Any]
 
-def ExtractJson(path:str): 
-    with open(path,"r") as f:
-        json_str = f.read()
-        
-    data = json.loads(json_str)
-    return data
-
-def ExtractYaml(path: str):
-    with open(path, "r") as f:
-        data = yaml.safe_load(f)
-    return data
-
+# change for each change in the yaml file
 def StoreSlides(data) -> list[SlideData]:
     slides = data.get("slides",None)
     if len(slides) == 0:
@@ -49,6 +37,22 @@ def StoreSlides(data) -> list[SlideData]:
         
     return slides_data
 
+# makes tts from slidedata object that has all the yaml output
+def MakeTranscripts(slide_data:SlideData):
+    tts = TTSModel()
+    text_for_transcript = ""
+    slide_name = slide_data.title.text
+    for item in slide_data.content:
+        name = item.get("type","")
+        args = item.get("args",[])
+        
+        if name == "text":
+            txt = args.get("text","text missing")
+            text_for_transcript = txt + " "
+            
+    tts.SpeakAndSave(text_for_transcript, slide_name)
+
+# make slides from slidedata object that has all the yaml output
 def MakeSlide(slide_data:SlideData):
     slide = Slide(slide_data.title.text)
     slide.AddTitleText(x=slide_data.title.alignment, text=slide_data.title.text)
@@ -58,6 +62,7 @@ def MakeSlide(slide_data:SlideData):
         args = item.get("args",[])
         
         if name == "text":
+            txt = args.get("text","text missing")
             slide.AddBodyText(
                 args.get("alignment","left"),
                 text=args.get("text","text missing")
@@ -80,7 +85,8 @@ def MakeSlide(slide_data:SlideData):
                 scale=args.get("scale",1.0)
             )
         
-    slide.Save("output/")
+    slide.Save("slide_output/")
             
 for slide in StoreSlides(ExtractYaml("slides.yaml")):
     MakeSlide(slide)
+    MakeTranscripts(slide)

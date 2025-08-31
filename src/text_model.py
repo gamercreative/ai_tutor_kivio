@@ -12,9 +12,6 @@ model = AutoModelForCausalLM.from_pretrained(model_id, device_map="auto")
 
 pipe = pipeline(model=model, tokenizer=tokenizer, task='text-generation')
 
-# -------------------------
-# 2️⃣ Load prompt and RAG
-# -------------------------
 with open("prompts/prompt.txt", "r") as f:
     prompt_template = f.read()
 

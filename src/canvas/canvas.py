@@ -2,6 +2,7 @@ from PIL import Image,ImageDraw, ImageFont
 from canvas.utils import WrapText, GetX
 import matplotlib.pyplot as plt
 import io
+from os import makedirs
 from pylatexenc.latexwalker import LatexWalker
 from pylatexenc.latex2text import LatexNodes2Text
 import math # remove ba3ed el testing
@@ -78,6 +79,7 @@ class Slide:
     # a wrapper for the image save to save to disk
     # path is without file name and extension only folder path
     def Save(self, path=""):
+        makedirs(name=path, exist_ok = True)
         path_with_file = path + self.name + self.file_extension
         self.img.save(path_with_file)
         print(f"saved file at {path_with_file}")
@@ -134,6 +136,8 @@ class Slide:
             ax.axis("off")
             ax.text(0.5,0.5, f"${latex_string}$", fontsize=int(20*scale), ha="center", va = "center")
             
+            # savign to buffer not to disk
+            # if ram is overused or bad performence save to disk and bitch
             buf = io.BytesIO()
             plt.savefig(buf, format="png", bbox_inches="tight", transparent=True)
             plt.close(fig)
