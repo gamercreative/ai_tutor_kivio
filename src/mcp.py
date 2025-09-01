@@ -104,8 +104,7 @@ def MakeVideo(yaml_path):
         audio = MakeTranscripts(slide)
         slides_with_transcript.update({title:{"image":img, "audio":audio}})
         
-    print(slides_with_transcript)
-    video_gen.MakeVideo(slides_with_transcript)
+    # video_gen.MakeVideo(slides_with_transcript)
 
 
 if __name__ == "__main__":

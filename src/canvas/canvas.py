@@ -22,7 +22,10 @@ class Slide:
         
         #wraped text settings
         self.text_padding = 50
-        self.line_spacing = 12
+        self.line_spacing = 5
+        
+        # graphs settingsn
+        self.scale_thresh = 0.4
         
         # fonts can be customj or default
         try:
@@ -72,7 +75,7 @@ class Slide:
         self.draw.text((x,y),text, fill=color, font=font)
         # print(f"{text} added at pos x:{x} y:y{y}")
         
-        y = int(y) + self.line_spacing
+        y = int(y)
         self.last_cursor_y = y
 
         
@@ -106,7 +109,7 @@ class Slide:
             w, h = self.draw.textbbox((0, 0), line, font=font)[2:4]
             x_new = GetX(self.width,x,int(w))
             self.AddText(x=x_new , y=cursur_y, text=line, color=color, font=font)
-            cursur_y += int(h) + self.line_spacing
+            cursur_y += int(h)
             if cursur_y >= self.height:
                 print("AddWrapedText: text is too big to fit in the slide frame")
                 break
@@ -145,7 +148,10 @@ class Slide:
             buf.seek(0)
             latex_img = Image.open(buf)
             if latex_img.width >= self.width:
-                scale = max(scale - 0.2, 0.3)
+                if scale == self.scale_thresh:
+                    print("AddLatexText: No space for equation")
+                    return
+                scale = max(scale - 0.2, self.scale_thresh)
                 self.AddLatexText(x,y,latex_string=latex_string,scale=scale)
                 return
             
@@ -181,14 +187,21 @@ class Slide:
             else: print(f"AddGraph: no y label provided for graph {title}")
             
             buf = io.BytesIO()
-            plt.savefig(buf,format="png",bbox_inches="tight",transparent = True)
+            plt.savefig(buf,format="png", bbox_inches="tight", pad_inches=0.5,transparent = True)
             plt.close(fig)
             buf.seek(0)
             graph_image = Image.open(buf)
             
+            max_height = self.height + 50 - y
+            if graph_image.height > max_height:
+                scale_factor = max_height / graph_image.height
+                new_width = int(graph_image.width * scale_factor)
+                new_height = int(graph_image.height * scale_factor)
+                graph_image = graph_image.resize((new_width, new_height), Image.Resampling.LANCZOS)
+
             x = GetX(self.width,x ,graph_image.width)
             self.img.paste(graph_image, (x, y), graph_image)
-            self.last_cursor_y = y + graph_image.height + self.line_spacing
+            self.last_cursor_y = y + graph_image.height
             
         except Exception as e:
                 print(f"AddGraph error: {e}")
