@@ -13,17 +13,17 @@ class TextModel:
         makedirs(path,exist_ok = True)
         self.output_dest = path.strip() + "/" + "slides.yaml"
 
-    def GetPrompt(self,path = "prompts/prompt.txt"):
+    def GetPrompt(self,path = "prompts/prompt.txt",topic=""):
         with open(path, "r") as f:
             prompt_template = f.read()
-        return prompt_template
+        return prompt_template.replace("<Topic>",topic)
 
     def GetRag(self,path = "rag_docs/pythag.txt"):
         with open(path, "r") as f:
             rag_data = f.read()
 
-    def GenerateText(self):
-        prompt = self.GetPrompt()
+    def GenerateText(self,topic):
+        prompt = self.GetPrompt(topic=topic)
         
         rag = self.GetRag()
         # prompt = prompt_template.replace("<RAG>", rag_data)

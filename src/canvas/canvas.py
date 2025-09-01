@@ -144,6 +144,10 @@ class Slide:
             plt.close(fig)
             buf.seek(0)
             latex_img = Image.open(buf)
+            if latex_img.width >= self.width:
+                scale = max(scale - 0.2, 0.3)
+                self.AddLatexText(x,y,latex_string=latex_string,scale=scale)
+                return
             
             x = GetX(self.width,x ,latex_img.width)
             self.img.paste(latex_img, (x,y), latex_img)
