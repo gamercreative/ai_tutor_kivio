@@ -1,253 +1,318 @@
-
-slides:
-  - title:
-      text: "Roller Coaster Basics"
-      alignment: "middle"
-    content:
-      - type: text
-        args:
-          text: "Roller coasters are thrilling rides that use physics principles to create exciting experiences. Let's explore the basics of roller coaster physics!"
-          alignment: "left"
-      - type: render_latex
-        args:
-          latex_str: "\\text{Potential Energy (PE) = mgh}"
-          alignment: "middle"
-      - type: plot_graph
-        args:
-          points: [[0,0],[10,100],[10,0]]
-          x_label: "Distance (m)"
-          y_label: "Potential Energy (J)"
-          title: "Potential Energy vs. Distance"
-          scale: 1.5
-          alignment: "middle"
-
-  - title:
-      text: "Gravity and Roller Coasters"
-      alignment: "middle"
-    content:
-      - type: text
-        args:
-          text: "Gravity pulls objects towards the ground. Roller coasters use this force to create thrilling drops and hills. Let's explore how gravity affects roller coaster motion!"
-          alignment: "left"
-      - type: render_latex
-        args:
-          latex_str: "\\text{F_g = m*g}"
-          alignment: "middle"
-      - type: plot_graph
-        args:
-          points: [[0,0],[10,10],[10,0]]
-          x_label: "Distance (m)"
-          y_label: "Force (N)"
-          title: "Gravity's Force on a Roller Coaster"
-          scale: 1.5
-          alignment: "middle"
-
-  - title:
-      text: "Potential and Kinetic Energy"
-      alignment: "middle"
-    content:
-      - type: text
-        args:
-          text: "Potential energy is energy an object has due to its position, while kinetic energy is energy an object has due to its motion. Let's see how these energies relate to roller coasters!"
-          alignment: "left"
-      - type: render_latex
-        args:
-          latex_str: "\\text{KE = 0.5*m*v^2}"
-          alignment: "middle"
-      - type: plot_graph
-        args:
-          points: [[0,0],[10,50],[10,55],[0,55]]
-          x_label: "Distance (m)"
-          y_label: "Total Energy (J)"
-          title: "Potential and Kinetic Energy on a Roller Coaster"
-          scale: 1.5
-          alignment: "middle"
-
-  - title:
-      text: "Roller Coaster Friction"
-      alignment: "middle"
-    content:
-      - type: text
-        args:
-          text: "Friction is the force that opposes motion between two surfaces. Let's explore how friction affects roller coaster motion and how riders experience forces!"
-          alignment: "left"
-      - type: render_latex
-        args:
-          latex_str: "\\text{F_f = μ*F_n}"
-          alignment: "middle"
-      - type: plot_graph
-        args:
-          points: [[0,0],[10,10],[10,0],[15,5],[15,0]]
-          x_label: "Distance (m)"
-          y_label: "Force (N)"
-          title: "Friction on a Roller Coaster"
-          scale: 1.5
-          alignment: "middle"
-
-  - title:
-      text: "Roller Coaster Forces"
-      alignment: "middle"
-    content:
-      - type: text
-        args:
-          text: "Roller coasters create exciting forces for riders. Let's explore the forces involved in a roller coaster ride, including normal force, friction, and gravity!"
-          alignment: "left"
-      - type: render_latex
-        args:
-          latex_str: "\\text{F_n = m*g}"
-          alignment: "middle"
-      - type: plot_graph
-        args:
-          points: [[0,0],[10,10],[10,0],[15,15],[15,10]]
-          x_label: "Distance (m)"
-          y_label: "Force (N)"
-          title: "Roller Coaster Forces"
-          scale: 1.5
-          alignment: "middle"
-
-  - title:
-      text: "Roller Coaster Rolling Friction"
-      alignment: "middle"
-    content:
-      - type: text
-        args:
-          text: "Rolling friction is the force that opposes the motion of an object that is in contact with a surface and is rolling. Let's explore how rolling friction affects roller coaster motion!"
-          alignment: "left"
-      - type: render_latex
-        args:
-          latex_str: "\\text{F_r = μ_r*F_n}"
-          alignment: "middle"
-      - type: plot_graph
-        args:
-          points: [[0,0],[10,5],[10,0],[15,2],[15,0]]
-          x_label: "Distance (m)"
-          y_label: "Force (N)"
-          title: "Rolling Friction on a Roller Coaster"
-          scale: 1.5
-          alignment: "middle"
-
-  - title:
-      text: "Roller Coaster Air Resistance"
-      alignment: "middle"
-    content:
-      - type: text
-        args:
-          text: "Air resistance is the force that opposes the motion of an object moving through a fluid, like air. Let's explore how air resistance affects roller coaster motion!"
-          alignment: "left"
-      - type: render_latex
-        args:
-          latex_str: "\\text{F_a = 0.5*ρ*v^2*A}"
-          alignment: "middle"
-      - type: plot_graph
-        args:
-          points: [[0,0],[10,1],[10,0],[15,2],[15,0]]
-          x_label: "Distance (m)"
-          y_label: "Force (N)"
-          title: "Air Resistance on a Roller Coaster"
-          scale: 1.5
-          alignment: "middle"
-
-  - title:
-      text: "Roller Coaster Energy Conservation"
-      alignment: "middle"
-    content:
-      - type: text
-        args:
-          text: "Energy conservation is the principle that the total energy of a system remains constant if no energy is added or removed. Let's explore how energy conservation applies to roller coasters!"
-          alignment: "left"
-      - type: render_latex
-        args:
-          latex_str: "\\text{PE_initial = KE_final}"
-          alignment: "middle"
-      - type: plot_graph
-        args:
-          points: [[0,100],[10,50],[10,55],[0,55]]
-          x_label: "Distance (m)"
-          y_label: "Total Energy (J)"
-          title: "Energy Conservation on a Roller Coaster"
-          scale: 1.5
-          alignment: "middle"
-
-  - title:
-      text: "Roller Coaster Momentum"
-      alignment: "middle"
-    content:
-      - type: text
-        args:
-          text: "Momentum is the product of an object's mass and velocity. Let's explore how momentum affects roller coaster motion!"
-          alignment: "left"
-      - type: render_latex
-        args:
-          latex_str: "\\text{p = m*v}"
-          alignment: "middle"
-      - type: plot_graph
-        args:
-          points: [[0,0],[10,10],[10,0],[15,15],[15,10]]
-          x_label: "Distance (m)"
-          y_label: "Momentum (kg*m/s)"
-          title: "Momentum on a Roller Coaster"
-          scale: 1.5
-          alignment: "middle"
-
-  - title:
-      text: "Roller Coaster Centripetal Force"
-      alignment: "middle"
-    content:
-      - type: text
-        args:
-          text: "Centripetal force is the force that keeps an object moving in a circular path. Let's explore how centripetal force affects roller coaster motion!"
-          alignment: "left"
-      - type: render_latex
-        args:
-          latex_str: "\\text{F_c = m*v^2/r}"
-          alignment: "middle"
-      - type: plot_graph
-        args:
-          points: [[0,0],[5,5],[5,0],[10,10],[10,0]]
-          x_label: "Distance (m)"
-          y_label: "Force (N)"
-          title: "Centripetal Force on a Roller Coaster"
-          scale: 1.5
-          alignment: "middle"
-
-  - title:
-      text: "Roller Coaster Loops"
-      alignment: "middle"
-    content:
-      - type: text
-        args:
-          text: "Roller coaster loops are circular tracks that create exciting experiences for riders. Let's explore how physics principles, like centripetal force, allow roller coasters to safely navigate loops!"
-          alignment: "left"
-      - type: render_latex
-        args:
-          latex_str: "\\text{F_c = m*v^2/r}"
-          alignment: "middle"
-      - type: plot_graph
-        args:
-          points: [[0,0],[5,5],[5,0],[10,15],[10,0]]
-          x_label: "Distance (m)"
-          y_label: "Force (N)"
-          title: "Centripetal Force on a Roller Coaster Loop"
-          scale: 1.5
-          alignment: "middle"
-
-  - title:
-      text: "Roller Coaster Safety"
-      alignment: "middle"
-    content:
-      - type: text
-        args:
-          text: "Safety is a top priority for roller coaster designers. Let's explore how physics principles, like centripetal force and energy conservation, are used to ensure rider safety!"
-          alignment: "left"
-      - type: render_latex
-        args:
-          latex_str: "\\text{F_c = m*v^2/r}"
-          alignment: "middle"
-      - type: plot_graph
-        args:
-          points: [[0,0],[5,5],[5,0],[10,15],[10,0]]
-          x_label: "Distance (m)"
-          y_label: "Force (N)"
-          title: "Centripetal Force on a Roller Coaster Loop (Safety)"
-          scale: 1.5
-          alignment: "middle"
+{
+  "slides": [
+    {
+      "title": {
+        "text": "Welcome to AI Video Slide Generation",
+        "alignment": "middle"
+      },
+      "content": [
+        {
+          "type": "text",
+          "args": {
+            "text": "AI-driven video slide generation combines text, visuals, and interactivity to create engaging lessons instantly. Each slide can have explanations, math, or graphs.",
+            "alignment": "left"
+          }
+        },
+        {
+          "type": "plot_graph",
+          "args": {
+            "points": [[0,0],[1,1],[2,2],[3,3]],
+            "x_label": "Slide",
+            "y_label": "Engagement",
+            "title": "Engagement vs Slide",
+            "scale": 1.0,
+            "alignment": "middle"
+          }
+        },
+        {
+          "type": "text",
+          "args": {
+            "text": "The graph shows how interactive visuals can boost engagement across slides. AI can automatically choose these based on content type.",
+            "alignment": "left"
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "text": "Dynamic Text Narration",
+        "alignment": "middle"
+      },
+      "content": [
+        {
+          "type": "text",
+          "args": {
+            "text": "AI can generate child-friendly narration text. It adjusts sentence length for TTS and adds context, making learning easier and smoother.",
+            "alignment": "left"
+          }
+        },
+        {
+          "type": "render_latex",
+          "args": {
+            "latex_str": "E = mc^2",
+            "alignment": "middle"
+          }
+        },
+        {
+          "type": "text",
+          "args": {
+            "text": "Here, a famous formula is rendered using LaTeX, helping students visualize math concepts while listening to narration.",
+            "alignment": "left"
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "text": "Custom Visuals Per Slide",
+        "alignment": "middle"
+      },
+      "content": [
+        {
+          "type": "text",
+          "args": {
+            "text": "AI can generate custom visuals like charts, diagrams, or highlighted images automatically for each slide based on the lesson topic.",
+            "alignment": "left"
+          }
+        },
+        {
+          "type": "plot_graph",
+          "args": {
+            "points": [[0,1],[1,2],[2,4],[3,8]],
+            "x_label": "Lesson Step",
+            "y_label": "Understanding",
+            "title": "Learning Curve",
+            "scale": 1.0,
+            "alignment": "middle"
+          }
+        },
+        {
+          "type": "text",
+          "args": {
+            "text": "This graph visualizes learning progression. Each point can correspond to a concept introduced, helping AI select optimal visuals.",
+            "alignment": "left"
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "text": "Interactive Math Visuals",
+        "alignment": "middle"
+      },
+      "content": [
+        {
+          "type": "text",
+          "args": {
+            "text": "AI can generate LaTeX equations and interactive math visuals dynamically for video slides, making abstract concepts tangible and fun for students.",
+            "alignment": "left"
+          }
+        },
+        {
+          "type": "render_latex",
+          "args": {
+            "latex_str": "\\frac{d}{dx} e^x = e^x",
+            "alignment": "middle"
+          }
+        },
+        {
+          "type": "text",
+          "args": {
+            "text": "The derivative is rendered instantly. AI can also create step-by-step visualizations showing the calculation process on slides.",
+            "alignment": "left"
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "text": "AI-Powered Animations",
+        "alignment": "middle"
+      },
+      "content": [
+        {
+          "type": "text",
+          "args": {
+            "text": "Animations can be automatically suggested and applied. AI understands what to animate to highlight key ideas, like moving graphs or evolving equations.",
+            "alignment": "left"
+          }
+        },
+        {
+          "type": "plot_graph",
+          "args": {
+            "points": [[0,0],[1,1],[2,4],[3,9]],
+            "x_label": "Time",
+            "y_label": "Growth",
+            "title": "Animated Quadratic Growth",
+            "scale": 1.0,
+            "alignment": "middle"
+          }
+        },
+        {
+          "type": "text",
+          "args": {
+            "text": "This quadratic growth animation can be rendered step by step by AI, allowing TTS narration to sync with visual change.",
+            "alignment": "left"
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "text": "Adaptive Slide Complexity",
+        "alignment": "middle"
+      },
+      "content": [
+        {
+          "type": "text",
+          "args": {
+            "text": "AI can adapt the complexity of each slide based on the lesson plan or audience age, providing easier or more advanced visuals automatically.",
+            "alignment": "left"
+          }
+        },
+        {
+          "type": "render_latex",
+          "args": {
+            "latex_str": "\\int_0^\\pi \\sin(x) dx = 2",
+            "alignment": "middle"
+          }
+        },
+        {
+          "type": "text",
+          "args": {
+            "text": "Integrals or formulas can be simplified for younger audiences or expanded for advanced learners. AI adjusts visuals and narration accordingly.",
+            "alignment": "left"
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "text": "Real-Time Feedback Visualization",
+        "alignment": "middle"
+      },
+      "content": [
+        {
+          "type": "text",
+          "args": {
+            "text": "AI can integrate real-time student responses into video slides, updating graphs or visuals dynamically to reflect class understanding.",
+            "alignment": "left"
+          }
+        },
+        {
+          "type": "plot_graph",
+          "args": {
+            "points": [[0,0],[1,2],[2,1],[3,3]],
+            "x_label": "Time",
+            "y_label": "Correct Answers",
+            "title": "Class Feedback",
+            "scale": 1.0,
+            "alignment": "middle"
+          }
+        },
+        {
+          "type": "text",
+          "args": {
+            "text": "This graph can show live student progress during interactive video lessons, enhancing engagement and personalized learning.",
+            "alignment": "left"
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "text": "Cross-Modal Integration",
+        "alignment": "middle"
+      },
+      "content": [
+        {
+          "type": "text",
+          "args": {
+            "text": "AI can combine text, audio, visuals, and animation seamlessly. For example, highlighting a term while the narrator explains it and plotting its data.",
+            "alignment": "left"
+          }
+        },
+        {
+          "type": "plot_graph",
+          "args": {
+            "points": [[0,0],[1,1],[2,0],[3,1]],
+            "x_label": "Lesson Concept",
+            "y_label": "Emphasis",
+            "title": "Cross-Modal Sync",
+            "scale": 1.0,
+            "alignment": "middle"
+          }
+        },
+        {
+          "type": "text",
+          "args": {
+            "text": "AI ensures every slide element is synchronized for maximum clarity and engagement, making learning natural and visually appealing.",
+            "alignment": "left"
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "text": "Personalized Learning Paths",
+        "alignment": "middle"
+      },
+      "content": [
+        {
+          "type": "text",
+          "args": {
+            "text": "AI can generate personalized video slides based on prior knowledge or user goals, adapting pace, difficulty, and visualizations automatically.",
+            "alignment": "left"
+          }
+        },
+        {
+          "type": "render_latex",
+          "args": {
+            "latex_str": "P(A|B) = \\frac{P(A \\cap B)}{P(B)}",
+            "alignment": "middle"
+          }
+        },
+        {
+          "type": "text",
+          "args": {
+            "text": "Probability formulas can be adapted for different levels, showing examples interactively and making abstract concepts easy to grasp.",
+            "alignment": "left"
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "text": "AI Slide Generation: Summary",
+        "alignment": "middle"
+      },
+      "content": [
+        {
+          "type": "text",
+          "args": {
+            "text": "AI-driven video slide generation creates interactive, engaging, and personalized lessons using text, LaTeX, graphs, and TTS-ready narration seamlessly.",
+            "alignment": "left"
+          }
+        },
+        {
+          "type": "plot_graph",
+          "args": {
+            "points": [[0,1],[1,2],[2,3],[3,4]],
+            "x_label": "Slide Quality",
+            "y_label": "Student Engagement",
+            "title": "AI Impact",
+            "scale": 1.0,
+            "alignment": "middle"
+          }
+        },
+        {
+          "type": "text",
+          "args": {
+            "text": "AI empowers educators to produce fully interactive video lessons instantly, optimizing engagement, comprehension, and learning outcomes for students.",
+            "alignment": "left"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -113,8 +113,10 @@ class Slide:
             if cursur_y >= self.height:
                 print("AddWrapedText: text is too big to fit in the slide frame")
                 break
-        self.last_cursor_y = cursur_y
-
+        if font == self.title_font:
+            self.last_cursor_y = cursur_y + 25
+        else:
+            self.last_cursor_y = cursur_y + 25
     # just wrappers so no need for check and such things
     # add title text
     def AddTitleText(self, x, y:int=None, text:str = "", color:str = "black", max_width:int = None):

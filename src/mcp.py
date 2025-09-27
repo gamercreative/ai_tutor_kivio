@@ -3,7 +3,6 @@ from dataclasses import dataclass, field
 from typing import Any
 from src.utils import *
 from src.voice_model import TTSModel
-from src.text_model import TextModel
 from src.video_gen import VideoGenerator
 
 @dataclass
@@ -94,11 +93,11 @@ def MakeSlide(slide_data:SlideData):
         
     return output_dest
 
-def MakeVideo(yaml_path):
+def MakeVideo(path):
     video_gen = VideoGenerator()
     slides_with_transcript:dict[str,Any] = {}
-
-    for slide in StoreSlides(ExtractYaml(yaml_path)):
+    
+    for slide in StoreSlides(ExtractJson(path)):
         title = slide.title.text
         img = MakeSlide(slide)
         audio = MakeTranscripts(slide)
@@ -106,6 +105,5 @@ def MakeVideo(yaml_path):
         
     # video_gen.MakeVideo(slides_with_transcript)
 
-
 if __name__ == "__main__":
-    MakeVideo("slides.yaml")
+    MakeVideo("slides.json")

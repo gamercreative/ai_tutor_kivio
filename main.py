@@ -5,4 +5,4 @@ from src.text_model import TextModel
 # text_path = TextModel().GenerateText(topic)
 # MakeVideo(text_path)
 
-MakeVideo("text_output/slides.yaml")
+MakeVideo("text_output/slides.json")

@@ -9,9 +9,9 @@ class TextModel:
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_id, use_fast=True)
         self.model = AutoModelForCausalLM.from_pretrained(self.model_id, device_map="auto")
         self.pipe = pipeline(model=self.model, tokenizer=self.tokenizer, task='text-generation')
-        
+        self.format = "json" # can be "yaml"
         makedirs(path,exist_ok = True)
-        self.output_dest = path.strip() + "/" + "slides.yaml"
+        self.output_dest = path.strip() + "/" + f"slides.{self.format}"
 
     def GetPrompt(self,path = "prompts/prompt.txt",topic=""):
         with open(path, "r") as f:
@@ -30,19 +30,19 @@ class TextModel:
         
         # get output and filter the output text form the rest of hte metadat
         output = self.pipe(prompt, max_new_tokens=4000, return_full_text=False, temperature= 0.05)
-        slides_yaml = output[0]["generated_text"]
+        slides = output[0]["generated_text"]
         
-        self.Save(slides_yaml)
+        self.Save(slides)
         return self.output_dest
 
     # Save the output as a YAML file
-    def Save(self, slides_yaml):
+    def Save(self, slides):
         with open(self.output_dest, "w") as f:
-            f.write(slides_yaml)
+            f.write(slides)
             print("done")
 
         try:
-            slides_data = yaml.safe_load(slides_yaml)
+            slides_data = yaml.safe_load(slides)
         except yaml.YAMLError as e:
             print("YAML parsing error:", e)
             slides_data = None

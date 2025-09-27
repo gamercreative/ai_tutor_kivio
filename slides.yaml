@@ -1,149 +1,33 @@
-
-slides:
-  - title:
-      text: "Energy Transfers in a Roller Coaster"
-      alignment: "middle"
-    content:
-      - type: text
-        args:
-          text: "A roller coaster stores energy in its potential form at the top of a hill. As it descends, the energy is transferred to kinetic energy. When the roller coaster goes through a loop, some energy is lost due to friction and air resistance. But most of the energy is conserved and transferred back to potential energy as the roller coaster climbs the next hill."
-          alignment: "left"
-      - type: render_latex
-        args:
-          latex_str: "\\text{Potential Energy} = mgh"
-          alignment: "middle"
-
-  - title:
-      text: "Potential Energy in a Spring"
-      alignment: "middle"
-    content:
-      - type: text
-        args:
-          text: "A spring can store energy in its potential form. When a spring is compressed, energy is stored in the spring. When the spring is released, the energy is transferred to kinetic energy as the spring extends. The energy is conserved as long as there is no friction or other energy losses."
-          alignment: "left"
-      - type: render_latex
-        args:
-          latex_str: "\\text{Potential Energy} = \\frac{1}{2}kx^2"
-          alignment: "middle"
-
-  - title:
-      text: "Conservation of Mechanical Energy in a Simple Harmonic Oscillator"
-      alignment: "middle"
-    content:
-      - type: text
-        args:
-          text: "A simple harmonic oscillator, like a pendulum, conserves mechanical energy between its potential and kinetic energy at each point in its motion. The energy is transferred back and forth between potential and kinetic energy as the oscillator moves back and forth."
-          alignment: "left"
-      - type: plot_graph
-        args:
-          points: [[0,0],[1,1],[2,0],[3,1],[4,0],[5,1]]
-          x_label: "Position"
-          y_label: "Energy"
-          title: "Energy in a Simple Harmonic Oscillator"
-          scale: 1.0
-          alignment: "middle"
-
-  - title:
-      text: "Conservation of Mechanical Energy in a Roller Coaster Loop"
-      alignment: "middle"
-    content:
-      - type: text
-        args:
-          text: "When a roller coaster goes through a loop, some energy is lost due to friction and air resistance. But most of the energy is conserved and transferred back to potential energy as the roller coaster climbs the next hill. This is why roller coasters can go upside down and still complete the ride."
-          alignment: "left"
-      - type: render_latex
-        args:
-          latex_str: "\\text{Potential Energy} = mgh"
-          alignment: "middle"
-
-  - title:
-      text: "Elastic Collisions and Conservation of Mechanical Energy"
-      alignment: "middle"
-    content:
-      - type: text
-        args:
-          text: "During an elastic collision, the total momentum before the collision is equal to the total momentum after the collision. This is because the energy is conserved and transferred between the objects. The kinetic energy of the objects is also conserved, meaning that the total energy before the collision is equal to the total energy after the collision."
-          alignment: "left"
-
-  - title:
-      text: "Inelastic Collisions and Conservation of Mechanical Energy"
-      alignment: "middle"
-    content:
-      - type: text
-        args:
-          text: "During an inelastic collision, some energy is lost due to internal energy or other factors. The total momentum before the collision is still equal to the total momentum after the collision, but the total energy is not conserved. However, the total kinetic energy before the collision is still equal to the total kinetic energy after the collision."
-          alignment: "left"
-
-  - title:
-      text: "Conservation of Mechanical Energy in a System"
-      alignment: "middle"
-    content:
-      - type: text
-        args:
-          text: "The total mechanical energy of a closed system is conserved if there is no energy transfer in or out of the system. This is known as the law of conservation of energy. For example, in a pendulum, the energy is transferred back and forth between potential and kinetic energy as the pendulum swings back and forth."
-          alignment: "left"
-
-  - title:
-      text: "Conservation of Mechanical Energy in a Ramp"
-      alignment: "middle"
-    content:
-      - type: text
-        args:
-          text: "When an object moves along a ramp, its potential energy is converted to kinetic energy as it moves down the ramp. When the object reaches the bottom of the ramp, all of its potential energy has been converted to kinetic energy. The total mechanical energy of the object is conserved as long as there is no energy loss due to friction or other factors."
-          alignment: "left"
-
-  - title:
-      text: "Conservation of Mechanical Energy in a Roller Coaster"
-      alignment: "middle"
-    content:
-      - type: text
-        args:
-          text: "A roller coaster stores energy in its potential form at the top of a hill. As it descends, the energy is transferred to kinetic energy. When the roller coaster goes through a loop, some energy is lost due to friction and air resistance. But most of the energy is conserved and transferred back to potential energy as the roller coaster climbs the next hill."
-          alignment: "left"
-      - type: render_latex
-        args:
-          latex_str: "\\text{Potential Energy} = mgh"
-          alignment: "middle"
-
-  - title:
-      text: "Conservation of Mechanical Energy in a Pendulum"
-      alignment: "middle"
-    content:
-      - type: text
-        args:
-          text: "A pendulum swings back and forth, transferring energy between its potential and kinetic forms. The total mechanical energy of the pendulum is conserved as long as there is no energy loss due to friction or other factors."
-          alignment: "left"
-      - type: plot_graph
-        args:
-          points: [[0,0],[1,1],[2,0],[3,1],[4,0],[5,1]]
-          x_label: "Angle"
-          y_label: "Energy"
-          title: "Energy in a Pendulum"
-          scale: 1.0
-          alignment: "middle"
-
-  - title:
-      text: "Conservation of Mechanical Energy in a Spring"
-      alignment: "middle"
-    content:
-      - type: text
-        args:
-          text: "A spring can store energy in its potential form. When a spring is compressed, energy is stored in the spring. When the spring is released, the energy is transferred to kinetic energy as the spring extends. The energy is conserved as long as there is no friction or other energy losses."
-          alignment: "left"
-      - type: render_latex
-        args:
-          latex_str: "\\text{Potential Energy} = \\frac{1}{2}kx^2"
-          alignment: "middle"
-
-  - title:
-      text: "Conservation of Mechanical Energy in a Roller Coaster Loop (Continued)"
-      alignment: "middle"
-    content:
-      - type: text
-        args:
-          text: "When a roller coaster goes through a loop, some energy is lost due to friction and air resistance. But most of the energy is conserved and transferred back to potential energy as the roller coaster climbs the next hill. This is why roller coasters can go upside down and still complete the ride."
-          alignment: "left"
-      - type: render_latex
-        args:
-          latex_str: "\\text{Potential Energy} = mgh"
-          alignment: "middle"
+{
+  "slides": [
+    {
+      "title": {
+        "text": "Adding Fractions",
+        "alignment": "middle"
+      },
+      "content": [
+        {
+          "type": "text",
+          "args": {
+            "text": "To add fractions, first find a common denominator. Then combine numerators and simplify if needed.",
+            "alignment": "left"
+          }
+        },
+        {
+          "type": "render_latex",
+          "args": {
+            "latex_str": "\\frac{1}{3} + \\frac{1}{6} = \\frac{1}{2}",
+            "alignment": "middle"
+          }
+        },
+        {
+          "type": "text",
+          "args": {
+            "text": "This shows 1/3 plus 1/6 equals 1/2. Visualizing fractions helps students grasp the concept quickly.",
+            "alignment": "left"
+          }
+        }
+      ]
+    }
+  ]
+}

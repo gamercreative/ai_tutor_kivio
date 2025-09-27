@@ -1,0 +1,306 @@
+{
+  "slides": [
+    {
+      "title": {
+        "text": "Introduction to MSE Derivative",
+        "alignment": "middle"
+      },
+      "content": [
+        {
+          "type": "text",
+          "args": {
+            "text": "Mean Squared Error (MSE) measures the average squared difference between predicted and actual values. Understanding its derivative is key for training models efficiently.",
+            "alignment": "left"
+          }
+        },
+        {
+          "type": "render_latex",
+          "args": {
+            "latex_str": "MSE = \\frac{1}{n} \\sum_{i=1}^{n} (y_i - \\hat{y}_i)^2",
+            "alignment": "middle"
+          }
+        },
+        {
+          "type": "text",
+          "args": {
+            "text": "This formula shows how MSE computes error. The derivative helps adjust predictions, guiding model parameters to reduce overall error during training.",
+            "alignment": "left"
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "text": "Why We Use Derivatives",
+        "alignment": "middle"
+      },
+      "content": [
+        {
+          "type": "text",
+          "args": {
+            "text": "Derivatives indicate the slope of the error function. They tell us how much to change weights in a model, making learning efficient and converging faster.",
+            "alignment": "left"
+          }
+        },
+        {
+          "type": "render_latex",
+          "args": {
+            "latex_str": "\\frac{\\partial MSE}{\\partial \\hat{y}_i} = \\frac{2}{n} (\\hat{y}_i - y_i)",
+            "alignment": "middle"
+          }
+        },
+        {
+          "type": "text",
+          "args": {
+            "text": "The derivative shows error contribution per prediction. It’s proportional to the difference between prediction and actual value, scaled by 2/n.",
+            "alignment": "left"
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "text": "Step-by-Step Derivation",
+        "alignment": "middle"
+      },
+      "content": [
+        {
+          "type": "text",
+          "args": {
+            "text": "Start with MSE definition, apply derivative rules. Treat each prediction independently, differentiate the squared term, and simplify to get the gradient for optimization.",
+            "alignment": "left"
+          }
+        },
+        {
+          "type": "render_latex",
+          "args": {
+            "latex_str": "MSE = \\frac{1}{n} \\sum (y_i - \\hat{y}_i)^2 \\Rightarrow \\frac{\\partial MSE}{\\partial \\hat{y}_i} = \\frac{2}{n} (\\hat{y}_i - y_i)",
+            "alignment": "middle"
+          }
+        },
+        {
+          "type": "text",
+          "args": {
+            "text": "This derivation highlights how differentiation transforms the MSE into a gradient suitable for updating model weights during gradient descent.",
+            "alignment": "left"
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "text": "Visualizing the Error Curve",
+        "alignment": "middle"
+      },
+      "content": [
+        {
+          "type": "text",
+          "args": {
+            "text": "Plotting MSE against predictions shows a parabola. The minimum indicates the perfect prediction. Derivatives point toward the slope, guiding corrections to reach the minimum.",
+            "alignment": "left"
+          }
+        },
+        {
+          "type": "plot_graph",
+          "args": {
+            "points": [[-2,4],[ -1,1],[0,0],[1,1],[2,4]],
+            "x_label": "Prediction - Actual",
+            "y_label": "MSE",
+            "title": "MSE Parabola",
+            "scale": 1.0,
+            "alignment": "middle"
+          }
+        },
+        {
+          "type": "text",
+          "args": {
+            "text": "The graph demonstrates that the slope changes direction on either side of the minimum. Gradients guide updates toward the center to minimize error.",
+            "alignment": "left"
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "text": "Effect on Weight Updates",
+        "alignment": "middle"
+      },
+      "content": [
+        {
+          "type": "text",
+          "args": {
+            "text": "During training, the derivative of MSE with respect to predictions is propagated back to weights. It scales the adjustments to reduce prediction errors efficiently.",
+            "alignment": "left"
+          }
+        },
+        {
+          "type": "render_latex",
+          "args": {
+            "latex_str": "\\Delta w = -\\eta \\frac{\\partial MSE}{\\partial w}",
+            "alignment": "middle"
+          }
+        },
+        {
+          "type": "text",
+          "args": {
+            "text": "Here, \\eta represents the learning rate. The gradient tells how much to update each weight, ensuring convergence towards lower error.",
+            "alignment": "left"
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "text": "Vectorized Form",
+        "alignment": "middle"
+      },
+      "content": [
+        {
+          "type": "text",
+          "args": {
+            "text": "For efficiency, MSE derivative can be computed in vector form. This allows batch processing of predictions and reduces computation in neural network training.",
+            "alignment": "left"
+          }
+        },
+        {
+          "type": "render_latex",
+          "args": {
+            "latex_str": "\\frac{\\partial MSE}{\\partial \\hat{\\mathbf{y}}} = \\frac{2}{n} (\\hat{\\mathbf{y}} - \\mathbf{y})",
+            "alignment": "middle"
+          }
+        },
+        {
+          "type": "text",
+          "args": {
+            "text": "The vectorized derivative applies to all predictions simultaneously, enabling faster updates and efficient GPU computation in large models.",
+            "alignment": "left"
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "text": "Intuition Behind the Gradient",
+        "alignment": "middle"
+      },
+      "content": [
+        {
+          "type": "text",
+          "args": {
+            "text": "The gradient points in the direction of steepest increase. Moving against it decreases MSE, guiding the model iteratively closer to optimal predictions.",
+            "alignment": "left"
+          }
+        },
+        {
+          "type": "plot_graph",
+          "args": {
+            "points": [[-2,4],[-1,1],[0,0],[1,1],[2,4]],
+            "x_label": "Prediction - Actual",
+            "y_label": "MSE",
+            "title": "Gradient Direction",
+            "scale": 1.0,
+            "alignment": "middle"
+          }
+        },
+        {
+          "type": "text",
+          "args": {
+            "text": "The slope on each side indicates how predictions should adjust. Negative slope means increase prediction, positive means decrease, guiding learning precisely.",
+            "alignment": "left"
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "text": "Combining with Learning Rate",
+        "alignment": "middle"
+      },
+      "content": [
+        {
+          "type": "text",
+          "args": {
+            "text": "The learning rate determines step size along the gradient. Proper choice ensures fast convergence without overshooting the minimum, balancing speed and stability.",
+            "alignment": "left"
+          }
+        },
+        {
+          "type": "render_latex",
+          "args": {
+            "latex_str": "w_{new} = w_{old} - \\eta \\frac{\\partial MSE}{\\partial w}",
+            "alignment": "middle"
+          }
+        },
+        {
+          "type": "text",
+          "args": {
+            "text": "Learning rate controls how much the weights change per step. Too small is slow, too large may diverge. AI models tune it automatically.",
+            "alignment": "left"
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "text": "Gradient Descent Iterations",
+        "alignment": "middle"
+      },
+      "content": [
+        {
+          "type": "text",
+          "args": {
+            "text": "Repeatedly applying the MSE derivative in gradient descent iteratively reduces error. Each step moves predictions closer to actual values, refining the model continuously.",
+            "alignment": "left"
+          }
+        },
+        {
+          "type": "plot_graph",
+          "args": {
+            "points": [[0,4],[1,3],[2,2],[3,1],[4,0]],
+            "x_label": "Iteration",
+            "y_label": "MSE",
+            "title": "Error Reduction Over Iterations",
+            "scale": 1.0,
+            "alignment": "middle"
+          }
+        },
+        {
+          "type": "text",
+          "args": {
+            "text": "The graph shows error decreasing each iteration. Derivatives drive learning, making the process fast and predictable for AI training pipelines.",
+            "alignment": "left"
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "text": "Summary of MSE Derivative",
+        "alignment": "middle"
+      },
+      "content": [
+        {
+          "type": "text",
+          "args": {
+            "text": "MSE derivative is essential for optimizing predictions. Understanding it conceptually and mathematically enables efficient training of neural networks and other predictive models.",
+            "alignment": "left"
+          }
+        },
+        {
+          "type": "render_latex",
+          "args": {
+            "latex_str": "\\frac{\\partial MSE}{\\partial \\hat{y}_i} = \\frac{2}{n} (\\hat{y}_i - y_i)",
+            "alignment": "middle"
+          }
+        },
+        {
+          "type": "text",
+          "args": {
+            "text": "Derivatives guide weight updates via gradient descent, reduce errors, and help models converge efficiently. Visuals reinforce understanding of slope and direction intuitively.",
+            "alignment": "left"
+          }
+        }
+      ]
+    }
+  ]
+}
